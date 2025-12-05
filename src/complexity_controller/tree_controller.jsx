@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import '@/css/App.css'
-import { navigate, pause, setDemo } from '@/services/api'
+import { navigate, pause, setDemo, navigateHome, reset, startSorting } from '@/services/api'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [background, setBackground] = useState('#ffffff');
+  const [inputStart, setInputStart] = useState(false);
+  const [inputReset, setInputReset] = useState(false);
 
   // Set demo on mount
   useEffect(() => {
@@ -13,20 +13,32 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='controller-container'>
       </div>
-      <h3>Searching and Sorting</h3>
-      <div className="card">
+      <h3 style={{padding:'5px'}}>Searching and Sorting</h3>
+      <div className="sorting-card">
         <div className="directions">
           <button onClick={() => navigate('prev')} id='left'>
-            ←
+            &#8656;
           </button>
           <button onClick={() => navigate('next')} id = "right">
-            →
+            &#8658;
           </button>
         </div>
+        <p id = 'num-pad-title'>Searching Algorithm Controls</p>
+        <div className="sorting-algorithms" style = {{marginTop: '15px'}}>
+          <button onClick={() => startSorting()} id='start_sorting'>
+            Start
+          </button>
+
+          <button onClick={() => reset()} id='reset_sorting'>
+            Reset
+          </button>
+
+        </div>
+
         <div className="home" style = {{marginTop: '20px'}}>
-          <button onClick={() => navigate('select')} id='home_button'>
+          <button onClick={() => navigateHome()} id='home_button'>
             &#127968;
           </button>
           <button onClick={() => pause()} id='pause_button'> || </button>
